@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Генератор описаний вакансий</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="logo">
+        <span class="logo-mark">В</span>
+        <span class="logo-text">Вакансии<span class="logo-ai">AI</span></span>
+      </div>
+      <span class="topbar-badge">Генератор описаний вакансий</span>
+    </div>
+  </header>
+
+  <main class="page">
+    <section class="hero">
+      <div class="hero-card">
+        <p class="eyebrow">HH · Telegram · сайт компании</p>
+        <h1>Опишите вакансию за секунды, а не за час</h1>
+        <p class="hero-subtitle">
+          Введите задачи, требования и условия — сервис соберёт готовый текст
+          под нужную площадку и стиль, а вы просто проверите и опубликуете.
+        </p>
+        <div class="hero-chips">
+          <span class="chip chip-dark">Без выдуманных условий</span>
+          <span class="chip chip-green">Редактирование на лету</span>
+          <span class="chip chip-violet">Готово к публикации</span>
+        </div>
+      </div>
+    </section>
+
+    <form id="vacancy-form" class="card form">
+      <h2 class="card-title">Сведения о вакансии</h2>
+
+      <label>
+        <span class="field-label">Название роли <span class="required">*</span></span>
+        <input type="text" name="role" required placeholder="Например, Frontend-разработчик">
+      </label>
+
+      <label>
+        <span class="field-label">Задачи <span class="required">*</span></span>
+        <textarea name="tasks" required rows="4" placeholder="Что предстоит делать на этой роли"></textarea>
+      </label>
+
+      <label>
+        <span class="field-label">Требования <span class="required">*</span></span>
+        <textarea name="requirements" required rows="4" placeholder="Какие навыки и опыт нужны"></textarea>
+      </label>
+
+      <label>
+        Условия работы
+        <textarea name="conditions" rows="3" placeholder="График, формат работы, зарплата, льготы (если применимо)"></textarea>
+      </label>
+
+      <label>
+        Стиль компании
+        <input type="text" name="company_style" placeholder="Например, молодая динамичная IT-команда">
+      </label>
+
+      <div class="row">
+        <label>
+          Площадка для публикации
+          <select name="platform">
+            <option value="hh">HH.ru</option>
+            <option value="telegram">Telegram</option>
+            <option value="website">Сайт компании</option>
+          </select>
+        </label>
+
+        <label>
+          Стиль текста
+          <select name="text_style">
+            <option value="business">Деловой</option>
+            <option value="neutral" selected>Нейтральный</option>
+            <option value="friendly">Дружелюбный</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="actions">
+        <button type="submit" id="generate-btn" class="btn btn-primary">Сгенерировать</button>
+      </div>
+    </form>
+
+    <p id="error" class="error" hidden></p>
+
+    <section id="result-section" class="card result" hidden>
+      <h2 class="card-title">Результат</h2>
+      <textarea id="result-text" rows="16"></textarea>
+      <div class="actions">
+        <button type="button" id="regenerate-btn" class="btn btn-dark">Сгенерировать заново</button>
+        <button type="button" id="copy-btn" class="btn btn-ghost">Скопировать</button>
+        <span id="copy-confirm" class="copy-confirm" hidden>Скопировано!</span>
+      </div>
+    </section>
+  </main>
+
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
